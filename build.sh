@@ -1,0 +1,1 @@
+zip -r paylands-module-woocommerce.zip .
