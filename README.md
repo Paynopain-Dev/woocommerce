@@ -27,7 +27,7 @@ After a few seconds, the WordPress installation will be accessible to be configu
 
     http://localhost:8000/
 
-Once the WordPress installation is configured, login and from the Dashboard enable the WooCommerce plugin by going to `Plugins > WooCommerce > Activate`. Follow these instructions on each step:
+Once the WordPress installation is configured, login and from the Dashboard enable the WooCommerce plugin by going to `Plugins > WooCommerce > Activate`. Add activate mode to paylands woocommerce. Follow these instructions on each step:
 1. Fill in the required fields.
 2. Deselect Stripe and Paypal as payment options.
 3. Select "Free shipping" on both the main location and other zones. Disable the "Print shipping labels at home" option.
@@ -37,6 +37,12 @@ Once the WordPress installation is configured, login and from the Dashboard enab
     1. Give the product a **Name** and a **Regular price**.
     2. Click the "Publish" button on the right.
     
+When we create a product, we need to be secure then we have activate payments, so:
+1. Go to dashboard and plugins.
+2. Check settings.
+3. Select payments options, and check paylands gateways.
+4. Select manage paylands gateways, and introduce their fields.
+
 You can now browse the store on the following URL:
 
     http://localhost:8000/?post_type=product

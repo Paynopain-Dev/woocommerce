@@ -665,9 +665,9 @@ function paylands_init_gateway_class() {
         {
             $env = $this->get_option("environment");
             if ($env == 'production') {
-                return "https://api.paylands.com/v1/";
+                return "http://ws.paylands.loc/sandbox";
             } else {
-                return "https://api.paylands.com/v1/sandbox/";
+                return "http://ws.paylands.loc/v1/sandbox";
             }
         }
 
