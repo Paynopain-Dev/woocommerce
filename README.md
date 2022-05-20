@@ -8,7 +8,7 @@ By using Docker we avoid having to manually install and tear down the WordPress 
 
 On first run, download a compatible WooCommerce version and uncompress it inside the `/plugins` folder. The Paylands WooCommerce plugin will also be installed automatically based on the plugin on "/src". Once ready, run the following command to install WordPress and its database on a docker container:
 
-    sudo docker-compose up --build -d
+    sudo docker-compose up --build -d || docker-compose up --build -d
 
 After a few seconds, the WordPress installation will be accessible to be configured on the following URL:
 
@@ -59,4 +59,4 @@ These are all pairs of versions of WordPress and WooCommerce that have been test
 | WordPress | WooCommerce | Compatibility|
 |-----------|-------------|--------------|
 | 5.2.1     | 3.5.3       | Yes          |
- | 
+ 
