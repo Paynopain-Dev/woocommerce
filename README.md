@@ -19,6 +19,10 @@ When you have clear what container you need just stop it and crash it too:
     sudo docker stop [container ID]
     sudo docker rm   [container ID]
 
+Then return to use this command:
+
+    sudo docker-compose up --build -d
+
 After a few seconds, the WordPress installation will be accessible to be configured on the following URL:
 
     http://localhost:8000/
