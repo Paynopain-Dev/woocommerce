@@ -14,7 +14,7 @@ If you use it this port 8000 for something with docker you will need to stop it 
 
     sudo docker container ls -a
 
-When you have clear what container you need just stop it and destroy it too:
+When you have clear what container you need just stop it and crash it too:
 
     sudo docker stop [container ID]
     sudo docker rm   [container ID]
