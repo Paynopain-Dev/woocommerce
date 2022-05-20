@@ -17,6 +17,7 @@ After a few seconds, the WordPress installation will be accessible to be configu
 ## Installation
 This section describes how to install the plugin and get it working.
 
+
 e.g.
 
 1.Upload paylands-woocommerce.php to the /wp-content/plugins/ directory
