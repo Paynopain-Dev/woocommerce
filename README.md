@@ -59,3 +59,4 @@ These are all pairs of versions of WordPress and WooCommerce that have been test
 | WordPress | WooCommerce | Compatibility|
 |-----------|-------------|--------------|
 | 5.2.1     | 3.5.3       | Yes          |
+ | 
