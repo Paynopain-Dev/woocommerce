@@ -14,16 +14,6 @@ After a few seconds, the WordPress installation will be accessible to be configu
 
     http://localhost:8000/
 
-## Installation
-This section describes how to install the plugin and get it working.
-
-
-e.g.
-
-1.Upload paylands-woocommerce.php to the /wp-content/plugins/ directory
-2.Activate the plugin through the 'Plugins' menu in WordPress
-3.Place <?php do_action('plugin_name_hook'); ?> in your templates
-
 Once the WordPress installation is configured, login and from the Dashboard enable the WooCommerce plugin by going to `Plugins > WooCommerce > Activate`. Follow these instructions on each step:
 1. Fill in the required fields.
 2. Deselect Stripe and Paypal as payment options.
