@@ -34,7 +34,7 @@ To try out a different version of WordPress, open `.docker/Dockerfile` and chang
 
     FROM wordpress:5.2.1
 
-Also download the version of WooCommerce from [here](https://wordpress.org/plugins/woocommerce/advanced/#plugin-download-history-stats). Unzip the file and move the `woocommerce` folder into the `/plugins` folder.
+Also download the version of WooCommerce from [here](https://developer.woocommerce.com/releases/). Unzip the file and move the `woocommerce` folder into the `/plugins` folder.
 
 Once this is done, run the following command to remove the WordPress installation and its database. This will delete any products you may have created.
 
