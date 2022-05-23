@@ -416,11 +416,11 @@ function paylands_init_gateway_class() {
                                 break;
                     
                             case 'SUCCESS':
-                                $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                                $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                                 break;
                                 
                             default:
-                                $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                                $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                                 break;
                         }
                         $woocommerce->cart->empty_cart();
@@ -664,7 +664,7 @@ function paylands_init_gateway_class() {
         public function getPaylandUrl()
         {
             $env = $this->get_option("environment");
-            if ($env == 'production') {
+            if ($env == 'sandbox') {
                 return "http://ws.paylands.loc/sandbox";
             } else {
                 return "http://ws.paylands.loc/v1/sandbox";

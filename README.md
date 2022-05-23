@@ -1,4 +1,4 @@
-# Paylands WooCommerce Plugin v2.0.1
+# Paylands WooCommerce Plugin
 
 This plugin adds a **Paylands** Payment Option in WooCommerce plugin for WordPress.
 
@@ -10,7 +10,7 @@ On first run, download a compatible WooCommerce version and uncompress it inside
 
     sudo docker-compose up --build -d 
 
-If you use it this port 8000 for something with docker you will need to stop it and destroy it. First of all check which ID have this container:
+If you use it this port 8000, or when you use docker port for something you will need to stop it and destroy it. First of all check which ID have this container:
 
     sudo docker container ls -a
 
