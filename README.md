@@ -70,6 +70,7 @@ If you encounter an error, you may need to enable WordPress debugging manually s
 Once inside, you can edit the file `wp-config.php` using `vim` and change the following line, setting the value to **true**.
 
     define( 'WP_DEBUG', false );
+esto workea?
 
 ## Compatibility
 
