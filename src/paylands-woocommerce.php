@@ -235,15 +235,15 @@ function paylands_init_gateway_class() {
                         'completed'  => __( 'Completado' )
                     ),
                 ),
-			); 
+			);
 		}
-        
+
 
 		/**
 		 * You will need it if you want your custom credit card form, Step 4 is about it
 		 */
 		public function payment_fields() {
- 
+
             if( $this->get_option( 'pay_type' ) == 'withhold_payment' ){
                 echo wpautop( wp_kses_post( __('No se te cobrará nada en este momento. El cobro se realizará cuando el comercio envíe el/los producto/s.') ) );
             }
@@ -265,7 +265,7 @@ function paylands_init_gateway_class() {
    
 			// I will echo() the form, but you can close PHP tags and print it directly in HTML
 			echo '<fieldset id="wc-' . esc_attr( $this->id ) . '-cc-form" class="wc-credit-card-form wc-payment-form" style="background:transparent;">';
-		 
+
 			// Add this action hook if you want your custom payment gateway to support it
 			do_action( 'woocommerce_credit_card_form_start', $this->id );
             $accountId = 0;
@@ -340,7 +340,7 @@ function paylands_init_gateway_class() {
 		 * Custom CSS and JS, in most cases required only when you decided to go with a custom credit card form
 		 */
 		public function payment_scripts() {
-            wp_enqueue_script( 'paylands', 'https://api.paylands.com/js/v1-iframe.js' ); 
+            wp_enqueue_script( 'paylands', "http://ws.paylands.loc/js/v1-iframe.js" );
 			wp_enqueue_script( 'woocommerce_paylands' );
 		}
 
@@ -363,8 +363,8 @@ function paylands_init_gateway_class() {
             try {
                 $isSecure = $this->get_option( 'paylands_secure' ) == 'no' ? false : true;
                 if ($isSecure) {
-                    if(!$_POST["paylands_uuid"]) {
-                        wc_add_notice(__('A ocurrido un error al crear el pedido.'), 'error');
+                    if(!isset($_POST["paylands_uuid"])) {
+                        wc_add_notice(__('Ha ocurrido un error al crear el pedido.'), 'error');
                         return;
                     }
                     $order = wc_get_order( $order_id );
@@ -379,9 +379,10 @@ function paylands_init_gateway_class() {
                         'result' => 'success',
                         'redirect' => $tokenUrl
                     );
+
                     
                 } else {
-                    if(!$_POST["paylands_uuid"]) {
+                    if(!isset($_POST["paylands_uuid"])) {
                         wc_add_notice(__('Se produjo un error al crear el pedido.'), 'error');
                         return;
                     }
@@ -665,9 +666,9 @@ function paylands_init_gateway_class() {
         {
             $env = $this->get_option("environment");
             if ($env == 'sandbox') {
-                return "http://ws.paylands.loc/sandbox";
+                return "http://ws.paylands.loc/v1/sandbox/";
             } else {
-                return "http://ws.paylands.loc/v1/sandbox";
+                return "http://ws.paylands.loc/v1/";
             }
         }
 
