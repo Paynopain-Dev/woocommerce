@@ -393,6 +393,7 @@ function paylands_init_gateway_class() {
                         "order_uuid" => $plOrder->order->uuid
                     );
 
+                    file_put_contents('/tmp/entra', $authData);
                     $plOrder = $this->charge($authData);
 
                     /* The var $plOrder->order->status return SUCCESS when "Instant payment" is configured if is "Withhold payment" return PENDING_CONFIRMATION */
