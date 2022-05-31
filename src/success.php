@@ -28,11 +28,11 @@ if ($paylandId && $order_id) {
             break;
 
         case 'instant_payment':
-            $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+            $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
             break;
             
         default:
-            $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+            $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
             break;
     }
     $woocommerce->cart->empty_cart();
