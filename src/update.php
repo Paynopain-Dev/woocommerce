@@ -26,11 +26,11 @@ if ($data) {
                     break;
         
                 case 'SUCCESS':
-                    $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                    $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                     break;
                     
                 default:
-                    $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                    $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                     break;
             }
         }
