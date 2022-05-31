@@ -3,9 +3,12 @@ var paylandsJs  = {
 		let payment = jQuery('input[name="payment_method"]:checked').val();
 		if (payment == 'paylands') {
 			console.log('>>>>>>>>>>>>>>>>>>>>><',paylands_config);
-			window.paylands.setMode(paylands_config.mode);
-			window.paylands.setTemplate(paylands_config.template);
-			setTimeout(function(){window.paylands.initializate(paylands_config.token,"paylands-frame")}, 3000);
+
+			setTimeout(function(){
+				window.paylands.setMode(paylands_config.mode);
+				window.paylands.setTemplate(paylands_config.template);
+				window.paylands.initializate(paylands_config.token,"paylands-frame")
+			}, 3000);
 			jQuery('#paylands-uuid').val('');
 		}
 	},
@@ -96,7 +99,7 @@ var placeOrder = function() {
 jQuery(function($){
 	var checkout_form = $( 'form.woocommerce-checkout' );
 	checkout_form.on( 'checkout_place_order', placeOrder );
-	
+
 	jQuery('form.woocommerce-checkout', function () {
 		paylandsJs.init();
 	});
@@ -104,11 +107,11 @@ jQuery(function($){
 	jQuery(document).on('updated_checkout', function () {
 		paylandsJs.init();
 	});
-	
+
 	jQuery(document).on('custom-form', function () {
 		paylandsJs.init();
 	});
-	
+
 	jQuery(document).on('click', '.paylands-card', function () {
 		let value = jQuery('input[name="paylands_card"]:checked').val();
 		if(value == 'custom') {
