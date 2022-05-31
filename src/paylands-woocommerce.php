@@ -363,8 +363,8 @@ function paylands_init_gateway_class() {
             try {
                 $isSecure = $this->get_option( 'paylands_secure' ) == 'no' ? false : true;
                 if ($isSecure) {
-                    if(!$_POST["paylands_uuid"]) {
-                        wc_add_notice(__('A ocurrido un error al crear el pedido.'), 'error');
+                    if(!isset($_POST["paylands_uuid"])) {
+                        wc_add_notice(__('Ha ocurrido un error al crear el pedido.'), 'error');
                         return;
                     }
                     $order = wc_get_order( $order_id );
@@ -381,7 +381,7 @@ function paylands_init_gateway_class() {
                     );
                     
                 } else {
-                    if(!$_POST["paylands_uuid"]) {
+                    if(!isset($_POST["paylands_uuid"])) {
                         wc_add_notice(__('Se produjo un error al crear el pedido.'), 'error');
                         return;
                     }
@@ -416,11 +416,11 @@ function paylands_init_gateway_class() {
                                 break;
                     
                             case 'SUCCESS':
-                                $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                                $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                                 break;
                                 
                             default:
-                                $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                                $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                                 break;
                         }
                         $woocommerce->cart->empty_cart();
