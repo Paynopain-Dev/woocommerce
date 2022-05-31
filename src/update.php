@@ -6,10 +6,10 @@ $data = json_decode($json);
 if ($data) {
     $data_order = $data->order;
     if ($data_order){
-        
+
         if($data_order->status == 'SUCCESS' || $data_order->status == 'PENDING_CONFIRMATION') {
             $order = wc_get_order($data_order->uuid);
-    
+
             switch ( $data_order->status ) {
                 case 'PENDING_CONFIRMATION':
                     $order->add_order_note( 'El cobro se realizará cuando el comercio envíe el/los producto/s. ¡Gracias!', true );
@@ -34,7 +34,6 @@ if ($data) {
                     break;
             }
         }
-
     }
 }
 echo 'OK';

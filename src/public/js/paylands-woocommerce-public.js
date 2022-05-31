@@ -24,6 +24,7 @@ var paylandsJs  = {
 					return false;
 				} else if (cardNumber == 'custom') {
 					//Selecciono una tarjeta personalizada
+					console.log('Entra1');
 					window.paylands.storeSourceCard();
 					return false;
 				} else {
@@ -33,6 +34,7 @@ var paylandsJs  = {
 				}
 			} else {
 				//Configurada la opcion de guardar tarjeta y no hay tarjetas
+				console.log('Entra2');
 				window.paylands.storeSourceCard();
 				return false;
 			}
@@ -40,6 +42,7 @@ var paylandsJs  = {
 		else {
 			//No configurada la opcion de guardar tarjeta
 			//Crear Orden
+			console.log('Entra3');
 			window.paylands.storeSourceCard();
 			return false;
 		}

@@ -374,7 +374,6 @@ function paylands_init_gateway_class() {
                     wc()->session->set( 'paylands_id', $paylandId );
                     wc()->session->set( 'order_id', $order_id );
                     $tokenUrl = $this->getRedirectUrl('payment/tokenized/'.$tokenResponse);
-
                     return array(
                         'result' => 'success',
                         'redirect' => $tokenUrl
@@ -393,7 +392,6 @@ function paylands_init_gateway_class() {
                         "order_uuid" => $plOrder->order->uuid
                     );
 
-                    file_put_contents('/tmp/entra', $authData);
                     $plOrder = $this->charge($authData);
 
                     /* The var $plOrder->order->status return SUCCESS when "Instant payment" is configured if is "Withhold payment" return PENDING_CONFIRMATION */
@@ -507,6 +505,7 @@ function paylands_init_gateway_class() {
                 $saveCard = false;
             }
             $customerId = $this->getCustomerId();
+            //tanto sea retener importe como 3DS, enviará esta info
             $payType    = $this->get_option( 'pay_type' ) == 'withhold_payment' ? 'DEFERRED' : 'AUTHORIZATION';
             $data = array(
                 'secure' => $isSecure,
