@@ -14,7 +14,7 @@ if ($data) {
                 case 'PENDING_CONFIRMATION':
                     $order->add_order_note( 'El cobro se realizará cuando el comercio envíe el/los producto/s. ¡Gracias!', true );
                     $order->add_order_note( 'Paylands uuid: ' . $data_order->uuid, false );
-                    // if payment is diferred, add paylands uuid as meta to use it in the future confirmation.
+                    // if payment is deferred, add paylands uuid as meta to use it in the future confirmation.
                     if ( version_compare( WC_VERSION, '2.7', '<' ) ) { 
                         update_post_meta( $data_order->uuid, '_paylands_uuid', $data_order->uuid );
                     } else { 

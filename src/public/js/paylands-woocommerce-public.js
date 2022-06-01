@@ -24,18 +24,15 @@ var paylandsJs  = {
 					return false;
 				} else if (cardNumber == 'custom') {
 					//Selecciono una tarjeta personalizada
-					console.log('Entramos pah');
 					window.paylands.storeSourceCard();
 					return false;
 				} else {
 					//Selecciono una tarjeta guardada
-					console.log('Entramos pah1');
 					jQuery('#paylands-uuid').val(cardNumber);
 					return true;
 				}
 			} else {
 				//Configurada la opcion de guardar tarjeta y no hay tarjetas
-				console.log('Entramos pah2');
 				window.paylands.storeSourceCard();
 				return false;
 			}
@@ -43,7 +40,6 @@ var paylandsJs  = {
 		else {
 			//No configurada la opcion de guardar tarjeta
 			//Crear Orden
-			console.log('Entramos pah3');
 			window.paylands.storeSourceCard();
 			return false;
 		}
@@ -131,7 +127,7 @@ jQuery(function($){
 		if (payment == 'paylands' && window.paylands !== 'undefined') {
 			setTimeout(function () {
 				paylandsJs.init()
-			}, '1000');
+			}, 1000);
 		}
 	});
 });

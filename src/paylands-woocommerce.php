@@ -404,7 +404,7 @@ function paylands_init_gateway_class() {
                             case 'PENDING_CONFIRMATION':
                                 $order->add_order_note( 'El cobro se realizará cuando el comercio envíe el/los producto/s. ¡Gracias!', true );
                                 $order->add_order_note( 'Paylands uuid: ' . $plOrder->order->uuid, false );
-                                // if payment is diferred, add paylands uuid as meta to use it in the future confirmation.
+                                // if payment is deferred, add paylands uuid as meta to use it in the future confirmation.
                                 if ( version_compare( WC_VERSION, '2.7', '<' ) ) { 
                                     update_post_meta( $order_id, '_paylands_uuid', $plOrder->order->uuid );
                                 } else { 
@@ -524,8 +524,10 @@ function paylands_init_gateway_class() {
                 "description" => "Order No. " . $order->get_id(),
                 'extra_data' => $this->getExtraData($order)
             );
+            file_put_contents('/var/tmp/entra1', json_encode($data));
             if ($isSecure) {
                 $data['source_uuid'] =  $source_id;
+                file_put_contents('/var/tmp/entra2', json_encode($data));
             }
             return $data;
         }
@@ -684,6 +686,8 @@ function paylands_init_gateway_class() {
             $data['signature'] = $this->get_option('signature');
             $api_key = $this->get_option("api_key");
             $url = $this->getPaylandUrl().$urlPath;
+            file_put_contents('/var/tmp/entra0', json_encode($url));
+            file_put_contents('/var/tmp/entra3', json_encode($urlPath));
             $headers = [
                 'Content-Type: application/json',
                 'Authorization: Bearer ' . $api_key
