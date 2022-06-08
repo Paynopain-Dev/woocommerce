@@ -1,15 +1,10 @@
+
 var paylandsJs  = {
 	init: function () {
-		let payment = jQuery('input[name="payment_method"]:checked').val();
-		if (payment == 'paylands') {
-			console.log('>>>>>>>>>>>>>>>>>>>>><',paylands_config);
-
-			setTimeout(function(){
-				window.paylands.setMode(paylands_config.mode);
-				window.paylands.setTemplate(paylands_config.template);
-				window.paylands.initializate(paylands_config.token,"paylands-frame")
-			}, 3000);
-			jQuery('#paylands-uuid').val('');
+		if (jQuery('input[name="payment_method"]:checked').val() == 'paylands' && paylands_config !== undefined && window.paylands !== undefined) {
+			window.paylands.setMode(paylands_config.mode);
+			window.paylands.setTemplate(paylands_config.template);
+			window.paylands.initializate(paylands_config.token,"paylands-frame");
 		}
 	},
 
@@ -53,6 +48,13 @@ var paylandsJs  = {
 		alert(message)
 	}
 }
+
+function initData()
+{
+	window.paylands.initializate(paylands_config.token,"paylands-frame");
+}
+
+document.addEventListener("paylandsLoaded", initData);
 
 /**
  * Catch js errors
@@ -117,17 +119,13 @@ jQuery(function($){
 		if(value == 'custom') {
 			jQuery('.custom-form').show();
 			paylandsJs.init();
-		} else {
-			jQuery('.custom-form').hide();
 		}
 	});
 
 	jQuery(document).on('payment_method_selected', function () {
 		let payment = jQuery('input[name="payment_method"]:checked').val();
 		if (payment == 'paylands' && window.paylands !== 'undefined') {
-			setTimeout(function () {
-				paylandsJs.init()
-			}, 1000);
+			paylandsJs.init();
 		}
 	});
 });
