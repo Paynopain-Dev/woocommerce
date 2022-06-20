@@ -1,26 +1,27 @@
 # Paylands WooCommerce plugin
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://paylands.com/
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Colaboradores: (debería ser una lista de los userid de wordpress.org)
+Enlace de donación: https://paylands.com/
+Etiquetas: comentarios, spam
+Requiere al menos: 3.0.1
+Probado hasta: 3.4
+Etiqueta estable: 4.3
+Licencia: GPLv2 o posterior
+URI de la licencia: http://www.gnu.org/licenses/gpl-2.0.html
 
-## Details
-If you want to prove this plugin you need to have installed the next versions of wordpress and woocommerce:
+## Detalles
+Si quieres probar este plugin debes tener instaladas las siguientes versiones de wordpress y woocommerce:
 
 - Wordpress: 5.2.1
 - Woocommerce: 3.5.3
 
-## Installation
-This section describes how to install the plugin and get it working.
+## Instalación
+Esta sección describe cómo instalar el plugin y hacerlo funcionar. Siga estos pasos:
 
-1. Move `paylands-module-woocommerce.php` to the `/wp-content/plugins/` directory of your Wordpress
-2. Activate the plugin through the 'Plugins' menu in WordPress with check box
-3. Activate Paylands plugin too in the same site
-4. Go to Paylands settings, and modify in `Paylands-gateway` all the features to make sure then this is looking for your panel.
+1. Mueve `paylands-module-woocommerce.php` al directorio `/wp-content/plugins/` de tu Wordpress
+2. Activa el plugin a través del menú 'Plugins' de WordPress con la casilla de verificación
+3. Activar el plugin de Paylands también en el mismo sitio
+4. Ir a la configuración de Paylands, y añadir en `Paylands-gateway` todas las credenciales necesarias
+
 
 
 
