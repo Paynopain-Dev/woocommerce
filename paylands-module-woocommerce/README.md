@@ -1,18 +1,24 @@
-# Paylands WooCommerce plugin
-Colaboradores: (debería ser una lista de los userid de wordpress.org)
-Enlace de donación: https://paylands.com/
-Etiquetas: comentarios, spam
-Requiere al menos: 3.0.1
-Probado hasta: 3.4
-Etiqueta estable: 4.3
-Licencia: GPLv2 o posterior
-URI de la licencia: http://www.gnu.org/licenses/gpl-2.0.html
+# Paylands plugin
+Paylands es una pasarela de pago la cual nos permite hacer diversas operaciones o pagos de una manera segura y eficaz.
+Dicho plugin es capaz de realizar una conexión con Paylands para poder realizar pagos online con woocommerce.
+Si queréis saber más sobre Paylands podéis acceder a la siguiente url: [aquí](https://paylands.com).
 
-## Detalles
+## Requisitos para poder usarlo
 Si quieres probar este plugin debes tener instaladas las siguientes versiones de wordpress y woocommerce:
 
 - Wordpress: 5.2.1
 - Woocommerce: 3.5.3
+
+Recuerda que para poder usar paylands, necesitas tener instalado los requisitos previos y tener woocommerce instalado
+en la sección de plugins de tu wordpress. Para eso es tan fácil como descargar la versión especificada de woocommerce
+[aquí](https://wordpress.org/plugins/woocommerce/advanced/#plugin-download-history-stats) y colocar dicho zip en la sección
+de plugins para extraerlo.
+
+![sección de Plugins 1](resources/fase1.png)
+
+Una vez estamos aquí, pulsamos a Upload plugin, y esto nos llevará a la localización donde añadiremos el zip:
+
+![sección de Plugins 1](resources/fase2.png)
 
 ## Instalación
 Esta sección describe cómo instalar el plugin y hacerlo funcionar. Siga estos pasos:
