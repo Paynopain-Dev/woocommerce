@@ -1,10 +1,10 @@
 # Paylands plugin
 Paylands es una pasarela de pago la cual nos permite hacer diversas operaciones o pagos de una manera segura y eficaz.
 Dicho plugin es capaz de realizar una conexión con Paylands para poder realizar pagos online con woocommerce.
-Si queréis saber más sobre Paylands podéis acceder a la siguiente url: [aquí](https://paylands.com).
+Para poder saber más sobre Paylands podéis acceder a la siguiente url: [aquí](https://paylands.com).
 
 ## Requisitos para poder usarlo
-Si quieres probar este plugin debes tener instaladas las siguientes versiones de wordpress y woocommerce:
+Una vez queremos probar este plugin debes tener instaladas las siguientes versiones de wordpress y woocommerce:
 
 - Wordpress: 5.2.1
 - Woocommerce: 3.5.3
