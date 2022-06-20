@@ -16,7 +16,7 @@
  * Plugin Name:       Paylands Woocommerce
  * Plugin URI:        https://paylands.com/
  * Description:       Acepta pagos con tarjeta a través de Paylands.
- * Version:           1.1.0
+ * Version:           1.0.0
  * Author:            Paylands
  * Author URI:        https://paylands.com/
  * License:           GPL-2.0+
@@ -298,7 +298,7 @@ function paylands_init_gateway_class() {
             /* Expose js configuration to frontend*/
             echo '<script>
                 var paylands_config = ' . json_encode($configurations) . '
-            </script>'; 
+            </script>';
 
             /** 
              * This is the modal showed for the user to enter the card details
@@ -310,7 +310,7 @@ function paylands_init_gateway_class() {
                     foreach ($cards as $card) {
                         echo '<div class="card">
                             <input style="display:inline-block;" type="radio" name="paylands_card" class="paylands-card" value="' . $card->uuid . '">
-                            <span class="card-number"><strong>Tarjeta: </strong>' . $card->last4 . '</span>
+                            <span class="card-number"><strong>Tarjeta: </strong>' . '************' . $card->last4 . '</span>
                             <span class="card-date"><strong>Fecha expiración: </strong>' . $card->expire_month . '/' . $card->expire_year . '</span>
                         </div>';
                     }
@@ -399,6 +399,7 @@ function paylands_init_gateway_class() {
                         // we received the payment
                         $order->payment_complete();
                         $order->reduce_order_stock();
+
 
                         switch ( $plOrder->order->status ) {
                             case 'PENDING_CONFIRMATION':
@@ -509,8 +510,8 @@ function paylands_init_gateway_class() {
             $data = array(
                 'secure' => $isSecure,
                 'save_card' => $saveCard,
-                'url_ok' => get_site_url(null, "wp-content/plugins/paylands-module-woocommerce/success.php"),
-                'url_ko' => get_site_url(null, "wp-content/plugins/paylands-module-woocommerce/error.php"),
+                'url_ok' => get_site_url(null, "wp-content/plugins/". basename(dirname(__FILE__)) ."/success.php"),
+                'url_ko' => get_site_url(null, "wp-content/plugins/". basename(dirname(__FILE__)) . "/error.php"),
                 //old
                 'signature' => $this->get_option('signature'),
                 'amount' => $order->get_total() * 100,
@@ -518,13 +519,12 @@ function paylands_init_gateway_class() {
                 'customer_ext_id' => $customerId,
                 'additional' => 'usuario',
                 'service' => $this->get_option('service'),
-                "url_post" => 'https://kobebryant.free.beeceptor.com',//get_site_url(null,"wp-content/plugins/paylands-module-woocommerce/update.php"),
+                "url_post" => get_site_url(null,"wp-content/plugins/" . basename(dirname(__FILE__)) ."/update.php"),
                 "template_uuid" => $this->get_option('service'),
                 "dcc_template_uuid" => "ea0d5f53-5901-4c6b-9d4a-7e7c9b0eeb7e",
                 "description" => "Order No. " . $order->get_id(),
                 'extra_data' => $this->getExtraData($order)
             );
-            file_put_contents('/var/www/html/wordpress/pruebecita', json_encode($data));
             if ($isSecure) {
                 $data['source_uuid'] =  $source_id;
             }

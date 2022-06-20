@@ -1,7 +1,7 @@
 
 var paylandsJs  = {
 	init: function () {
-		if (jQuery('input[name="payment_method"]:checked').val() == 'paylands' && paylands_config !== undefined && window.paylands !== undefined) {
+		if (jQuery('input[name="payment_method"]:checked').val() == 'paylands' && window.paylands !== undefined) {
 			window.paylands.setMode(paylands_config.mode);
 			window.paylands.setTemplate(paylands_config.template);
 			window.paylands.initializate(paylands_config.token,"paylands-frame");
