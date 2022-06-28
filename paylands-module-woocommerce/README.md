@@ -23,10 +23,9 @@ Una vez estamos aquí, pulsamos a Upload plugin, y esto nos llevará a la locali
 ## Instalación
 Esta sección describe cómo instalar el plugin y hacerlo funcionar. Siga estos pasos:
 
-1. Mueve `paylands-module-woocommerce.php` al directorio `/wp-content/plugins/` de tu Wordpress
-2. Activa el plugin a través del menú 'Plugins' de WordPress con la casilla de verificación
-3. Activar el plugin de Paylands también en el mismo sitio
-4. Ir a la configuración de Paylands, y añadir en `Paylands-gateway` todas las credenciales necesarias
+1. Activa el plugin a través del menú 'Plugins' de WordPress con la casilla de verificación
+2. Activar el plugin de Paylands también en el mismo sitio
+3. Ir a la configuración de Paylands, y añadir en `Paylands-gateway` todas las credenciales necesarias
 
 
 
