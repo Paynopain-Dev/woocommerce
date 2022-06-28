@@ -16,7 +16,7 @@
  * Plugin Name:       Paylands Woocommerce
  * Plugin URI:        https://paylands.com/
  * Description:       Acepta pagos con tarjeta a través de Paylands.
- * Version:           1.1.0
+ * Version:           1.0.0
  * Author:            Paylands
  * Author URI:        https://paylands.com/
  * License:           GPL-2.0+
@@ -298,7 +298,7 @@ function paylands_init_gateway_class() {
             /* Expose js configuration to frontend*/
             echo '<script>
                 var paylands_config = ' . json_encode($configurations) . '
-            </script>'; 
+            </script>';
 
             /** 
              * This is the modal showed for the user to enter the card details
@@ -310,7 +310,7 @@ function paylands_init_gateway_class() {
                     foreach ($cards as $card) {
                         echo '<div class="card">
                             <input style="display:inline-block;" type="radio" name="paylands_card" class="paylands-card" value="' . $card->uuid . '">
-                            <span class="card-number"><strong>Tarjeta: </strong>' . $card->last4 . '</span>
+                            <span class="card-number"><strong>Tarjeta: </strong>' . '************' . $card->last4 . '</span>
                             <span class="card-date"><strong>Fecha expiración: </strong>' . $card->expire_month . '/' . $card->expire_year . '</span>
                         </div>';
                     }
@@ -363,8 +363,8 @@ function paylands_init_gateway_class() {
             try {
                 $isSecure = $this->get_option( 'paylands_secure' ) == 'no' ? false : true;
                 if ($isSecure) {
-                    if(!$_POST["paylands_uuid"]) {
-                        wc_add_notice(__('A ocurrido un error al crear el pedido.'), 'error');
+                    if(!isset($_POST["paylands_uuid"])) {
+                        wc_add_notice(__('Ha ocurrido un error al crear el pedido.'), 'error');
                         return;
                     }
                     $order = wc_get_order( $order_id );
@@ -381,7 +381,7 @@ function paylands_init_gateway_class() {
                     );
                     
                 } else {
-                    if(!$_POST["paylands_uuid"]) {
+                    if(!isset($_POST["paylands_uuid"])) {
                         wc_add_notice(__('Se produjo un error al crear el pedido.'), 'error');
                         return;
                     }
@@ -400,11 +400,12 @@ function paylands_init_gateway_class() {
                         $order->payment_complete();
                         $order->reduce_order_stock();
 
+
                         switch ( $plOrder->order->status ) {
                             case 'PENDING_CONFIRMATION':
                                 $order->add_order_note( 'El cobro se realizará cuando el comercio envíe el/los producto/s. ¡Gracias!', true );
                                 $order->add_order_note( 'Paylands uuid: ' . $plOrder->order->uuid, false );
-                                // if payment is diferred, add paylands uuid as meta to use it in the future confirmation.
+                                // if payment is deferred, add paylands uuid as meta to use it in the future confirmation.
                                 if ( version_compare( WC_VERSION, '2.7', '<' ) ) { 
                                     update_post_meta( $order_id, '_paylands_uuid', $plOrder->order->uuid );
                                 } else { 
@@ -416,11 +417,11 @@ function paylands_init_gateway_class() {
                                 break;
                     
                             case 'SUCCESS':
-                                $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                                $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                                 break;
                                 
                             default:
-                                $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                                $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                                 break;
                         }
                         $woocommerce->cart->empty_cart();
@@ -509,8 +510,8 @@ function paylands_init_gateway_class() {
             $data = array(
                 'secure' => $isSecure,
                 'save_card' => $saveCard,
-                'url_ok' => get_site_url(null,"wp-content/plugins/paylands-module-woocommerce/success.php"),
-                'url_ko' => get_site_url(null, "wp-content/plugins/paylands-module-woocommerce/error.php"),
+                'url_ok' => get_site_url(null, "wp-content/plugins/". basename(dirname(__FILE__)) ."/success.php"),
+                'url_ko' => get_site_url(null, "wp-content/plugins/". basename(dirname(__FILE__)) . "/error.php"),
                 //old
                 'signature' => $this->get_option('signature'),
                 'amount' => $order->get_total() * 100,
@@ -518,7 +519,7 @@ function paylands_init_gateway_class() {
                 'customer_ext_id' => $customerId,
                 'additional' => 'usuario',
                 'service' => $this->get_option('service'),
-                "url_post" => get_site_url(null,"wp-content/plugins/paylands-module-woocommerce/update.php"),
+                "url_post" => get_site_url(null,"wp-content/plugins/" . basename(dirname(__FILE__)) ."/update.php"),
                 "template_uuid" => $this->get_option('service'),
                 "dcc_template_uuid" => "ea0d5f53-5901-4c6b-9d4a-7e7c9b0eeb7e",
                 "description" => "Order No. " . $order->get_id(),
