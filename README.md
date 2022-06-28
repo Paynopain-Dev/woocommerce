@@ -4,7 +4,7 @@ Dicho plugin es capaz de realizar una conexión con Paylands para poder realizar
 Para poder saber más sobre Paylands podéis acceder a la siguiente url: [aquí](https://paylands.com).
 
 ## Requisitos para poder usarlo
-Una vez queremos probar este plugin debes tener instaladas las siguientes versiones de wordpress y woocommerce:
+Recomendamos tener instaladas unas versiones de Wordpress y WooCommerce iguales o superiores a las siguientes:
 
 - Wordpress: 5.2.1
 - Woocommerce: 3.5.3
