@@ -26,7 +26,3 @@ Esta sección describe cómo instalar el plugin y hacerlo funcionar. Siga estos 
 1. Activa el plugin a través del menú 'Plugins' de WordPress con la casilla de verificación
 2. Activar el plugin de Paylands también en el mismo sitio
 3. Ir a la configuración de Paylands, y añadir en `Paylands-gateway` todas las credenciales necesarias
-
-
-
-
