@@ -16,7 +16,7 @@
  * Plugin Name:       Paylands Woocommerce
  * Plugin URI:        https://paylands.com/
  * Description:       Acepta pagos con tarjeta a través de Paylands.
- * Version:           1.1.0
+ * Version:           1.0.0
  * Author:            Paylands
  * Author URI:        https://paylands.com/
  * License:           GPL-2.0+
@@ -27,7 +27,7 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-	die;
+    die;
 }
 
 /**
@@ -42,8 +42,8 @@ define( 'PAYLANDS_WOOCOMMERCE_VERSION', '1.0.0' );
  * This action is documented in includes/class-paylands-woocommerce-activator.php
  */
 function activate_paylands_woocommerce() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-paylands-woocommerce-activator.php';
-	Paylands_Woocommerce_Activator::activate();
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-paylands-woocommerce-activator.php';
+    Paylands_Woocommerce_Activator::activate();
 }
 
 /**
@@ -51,8 +51,8 @@ function activate_paylands_woocommerce() {
  * This action is documented in includes/class-paylands-woocommerce-deactivator.php
  */
 function deactivate_paylands_woocommerce() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-paylands-woocommerce-deactivator.php';
-	Paylands_Woocommerce_Deactivator::deactivate();
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-paylands-woocommerce-deactivator.php';
+    Paylands_Woocommerce_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_paylands_woocommerce' );
@@ -75,8 +75,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-paylands-woocommerce.php';
  */
 function run_paylands_woocommerce() {
 
-	$plugin = new Paylands_Woocommerce();
-	$plugin->run();
+    $plugin = new Paylands_Woocommerce();
+    $plugin->run();
 
 }
 run_paylands_woocommerce();
@@ -91,8 +91,8 @@ if ( in_array( 'woocommerce/woocommerce.php', get_option( 'active_plugins' ) ) )
 }
 
 function paylands_add_gateway_class( $gateways ) {
-	$gateways[] = 'WC_Paylands_Gateway'; // your class name is here
-	return $gateways;
+    $gateways[] = 'WC_Paylands_Gateway'; // your class name is here
+    return $gateways;
 }
 
 /*
@@ -100,85 +100,85 @@ function paylands_add_gateway_class( $gateways ) {
  */
 function paylands_init_gateway_class() {
 
-	class WC_Paylands_Gateway extends WC_Payment_Gateway {
+    class WC_Paylands_Gateway extends WC_Payment_Gateway {
 
- 		/**
- 		 * Class constructor, more about it in Step 3
- 		 */
-		  public function __construct() {
+        /**
+         * Class constructor, more about it in Step 3
+         */
+        public function __construct() {
 
-			$this->id = 'paylands'; // payment gateway plugin ID
-			$this->icon = ''; // URL of the icon that will be displayed on checkout page near your gateway name
-			$this->has_fields = true; // in case you need a custom credit card form
-			$this->method_title = 'Paylands Gateway';
-			$this->method_description = 'Acepta pagos con tarjeta a través de Paylands'; // will be displayed on the options page
-		
-			// gateways can support subscriptions, refunds, saved payment methods,
-			// but in this tutorial we begin with simple payments
-			$this->supports = array(
-				'products'
-			);
-		
-			// Method with all the options fields
-			$this->init_form_fields();
-		
-			// Load the settings.
-			$this->init_settings();
-			$this->title = $this->get_option( 'title' );
-			$this->description = $this->get_option( 'description' );
-			$this->enabled = $this->get_option( 'enabled' );
-			$this->testmode = 'sandbox' === $this->get_option( 'environment' );
-			$this->private_key = $this->testmode ? $this->get_option( 'test_private_key' ) : $this->get_option( 'private_key' );
-			$this->publishable_key = $this->testmode ? $this->get_option( 'test_publishable_key' ) : $this->get_option( 'publishable_key' );
-		
-			// This action hook saves the settings
-			add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
-		
-			// We need custom JavaScript to obtain a token
-			add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ) );
-			
-			// You can also register a webhook here
-			add_action( 'woocommerce_api_{webhook paylands}', array( $this, 'webhook' ) );
-		 }
+            $this->id = 'paylands'; // payment gateway plugin ID
+            $this->icon = ''; // URL of the icon that will be displayed on checkout page near your gateway name
+            $this->has_fields = true; // in case you need a custom credit card form
+            $this->method_title = 'Paylands Gateway';
+            $this->method_description = 'Acepta pagos con tarjeta a través de Paylands'; // will be displayed on the options page
 
-		/**
- 		 * Plugin options, we deal with it in Step 3 too
- 		 */
-		  public function init_form_fields(){
+            // gateways can support subscriptions, refunds, saved payment methods,
+            // but in this tutorial we begin with simple payments
+            $this->supports = array(
+                'products'
+            );
 
-			$this->form_fields = array(
-				'enabled' => array(
-					'title'       => 'Habilitar/Desabilitar',
-					'label'       => 'Habilitar Paylands Gateway',
-					'type'        => 'checkbox',
-					'description' => '',
-					'default'     => 'no'
-				),
-				'title' => array(
-					'title'       => 'Título',
-					'type'        => 'text',
-					'description' => 'Título que se mostrará en el checkout',
-					'default'     => 'Pago Paylands ',
-					'desc_tip'    => true,
-				),
-				'description' => array(
-					'title'       => 'Descripción',
-					'type'        => 'textarea',
-					'description' => '',
-					'default'     => 'Pague con su tarjeta de crédito a través de nuestra pasarela de pago.',
-				),
-				'api_key' => array(
-					'title'       => 'API Key',
-					'type'        => 'text'
-				),
-				'signature' => array(
-					'title'       => 'Signature',
-					'type'        => 'text',
-				),
-				'service' => array(
-					'title'       => 'Service UUID',
-					'type'        => 'text'
-				),
+            // Method with all the options fields
+            $this->init_form_fields();
+
+            // Load the settings.
+            $this->init_settings();
+            $this->title = $this->get_option( 'title' );
+            $this->description = $this->get_option( 'description' );
+            $this->enabled = $this->get_option( 'enabled' );
+            $this->testmode = 'sandbox' === $this->get_option( 'environment' );
+            $this->private_key = $this->testmode ? $this->get_option( 'test_private_key' ) : $this->get_option( 'private_key' );
+            $this->publishable_key = $this->testmode ? $this->get_option( 'test_publishable_key' ) : $this->get_option( 'publishable_key' );
+
+            // This action hook saves the settings
+            add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
+
+            // We need custom JavaScript to obtain a token
+            add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ) );
+
+            // You can also register a webhook here
+            add_action( 'woocommerce_api_{webhook paylands}', array( $this, 'webhook' ) );
+        }
+
+        /**
+         * Plugin options, we deal with it in Step 3 too
+         */
+        public function init_form_fields(){
+
+            $this->form_fields = array(
+                'enabled' => array(
+                    'title'       => 'Habilitar/Desabilitar',
+                    'label'       => 'Habilitar Paylands Gateway',
+                    'type'        => 'checkbox',
+                    'description' => '',
+                    'default'     => 'no'
+                ),
+                'title' => array(
+                    'title'       => 'Título',
+                    'type'        => 'text',
+                    'description' => 'Título que se mostrará en el checkout',
+                    'default'     => 'Pago Paylands ',
+                    'desc_tip'    => true,
+                ),
+                'description' => array(
+                    'title'       => 'Descripción',
+                    'type'        => 'textarea',
+                    'description' => '',
+                    'default'     => 'Pague con su tarjeta de crédito a través de nuestra pasarela de pago.',
+                ),
+                'api_key' => array(
+                    'title'       => 'API Key',
+                    'type'        => 'text'
+                ),
+                'signature' => array(
+                    'title'       => 'Signature',
+                    'type'        => 'text',
+                ),
+                'service' => array(
+                    'title'       => 'Service UUID',
+                    'type'        => 'text'
+                ),
                 'environment' => array(
                     'title'       => __( 'Modo' ),
                     'label'       => __( 'Environment' ),
@@ -194,16 +194,16 @@ function paylands_init_gateway_class() {
                     'type'        => 'checkbox',
                     'description' => 'Si se habilita esta opción, las operaciones serán 3DS, lo que significa que el usuario deberá autenticarse contra su banco para finalizar la operación.',
                     'default'     => 'no',
-                    'desc_tip'    => true, 
+                    'desc_tip'    => true,
                     'default'     => 'yes',
                 ),
                 'mit' => array(
-                  'title'       => 'Enviar RECURRING para pagos MIT',
-                  'label'       => ' ',
-                  'type'        => 'checkbox',
-                  'description' => 'Si se habilita esta opción, se enviará un parámetro adicional en las operaciones con tarjetas previamente almacenadas. Algunas entidades adquirentes no admiten esta opción',
-                  'default'     => 'no',
-                  'desc_tip'    => true
+                    'title'       => 'Enviar RECURRING para pagos MIT',
+                    'label'       => ' ',
+                    'type'        => 'checkbox',
+                    'description' => 'Si se habilita esta opción, se enviará un parámetro adicional en las operaciones con tarjetas previamente almacenadas. Algunas entidades adquirentes no admiten esta opción',
+                    'default'     => 'no',
+                    'desc_tip'    => true
                 ),
                 'save_card' => array(
                     'title'       => 'Guardar Tarjetas',
@@ -235,15 +235,15 @@ function paylands_init_gateway_class() {
                         'completed'  => __( 'Completado' )
                     ),
                 ),
-			); 
-		}
-        
+            );
+        }
 
-		/**
-		 * You will need it if you want your custom credit card form, Step 4 is about it
-		 */
-		public function payment_fields() {
- 
+
+        /**
+         * You will need it if you want your custom credit card form, Step 4 is about it
+         */
+        public function payment_fields() {
+
             if( $this->get_option( 'pay_type' ) == 'withhold_payment' ){
                 echo wpautop( wp_kses_post( __('No se te cobrará nada en este momento. El cobro se realizará cuando el comercio envíe el/los producto/s.') ) );
             }
@@ -252,22 +252,22 @@ function paylands_init_gateway_class() {
                 echo wpautop( wp_kses_post(__('Configura tu módulo de Paylands')) );
                 return;
             }
-			// ok, let's display some description before the payment form
-			if ( $this->description ) {
-				// you can instructions for test mode, I mean test card numbers etc.
-				if ( $this->testmode ) {
-					$this->description .= ' MODO DE PRUEBA HABILITADO. En el modo de prueba, puede utilizar los números de tarjeta que se enumeran en la <a target="_blank" href="https://paylands.docs.apiary.io/#introduction/tarjetas-de-prueba">documentación.</a>';
-					$this->description  = trim( $this->description );
-				}
-				// display the description with <p> tags etc.
-				echo wpautop( wp_kses_post( $this->description ) );
-			}
-   
-			// I will echo() the form, but you can close PHP tags and print it directly in HTML
-			echo '<fieldset id="wc-' . esc_attr( $this->id ) . '-cc-form" class="wc-credit-card-form wc-payment-form" style="background:transparent;">';
-		 
-			// Add this action hook if you want your custom payment gateway to support it
-			do_action( 'woocommerce_credit_card_form_start', $this->id );
+            // ok, let's display some description before the payment form
+            if ( $this->description ) {
+                // you can instructions for test mode, I mean test card numbers etc.
+                if ( $this->testmode ) {
+                    $this->description .= ' MODO DE PRUEBA HABILITADO. En el modo de prueba, puede utilizar los números de tarjeta que se enumeran en la <a target="_blank" href="https://paylands.docs.apiary.io/#introduction/tarjetas-de-prueba">documentación.</a>';
+                    $this->description  = trim( $this->description );
+                }
+                // display the description with <p> tags etc.
+                echo wpautop( wp_kses_post( $this->description ) );
+            }
+
+            // I will echo() the form, but you can close PHP tags and print it directly in HTML
+            echo '<fieldset id="wc-' . esc_attr( $this->id ) . '-cc-form" class="wc-credit-card-form wc-payment-form" style="background:transparent;">';
+
+            // Add this action hook if you want your custom payment gateway to support it
+            do_action( 'woocommerce_credit_card_form_start', $this->id );
             $accountId = 0;
 
             try {
@@ -298,23 +298,23 @@ function paylands_init_gateway_class() {
             /* Expose js configuration to frontend*/
             echo '<script>
                 var paylands_config = ' . json_encode($configurations) . '
-            </script>'; 
+            </script>';
 
-            /** 
+            /**
              * This is the modal showed for the user to enter the card details
              */
- 
-            if($saveCard && $hasCards && $this->usuario_registrado()){ 
+
+            if($saveCard && $hasCards && $this->usuario_registrado()){
                 echo '<div class="select-card">
                     <p>Selecciona una tarjeta</p>';
-                    foreach ($cards as $card) {
-                        echo '<div class="card">
+                foreach ($cards as $card) {
+                    echo '<div class="card">
                             <input style="display:inline-block;" type="radio" name="paylands_card" class="paylands-card" value="' . $card->uuid . '">
-                            <span class="card-number"><strong>Tarjeta: </strong>' . $card->last4 . '</span>
+                            <span class="card-number"><strong>Tarjeta: </strong>' . '************' . $card->last4 . '</span>
                             <span class="card-date"><strong>Fecha expiración: </strong>' . $card->expire_month . '/' . $card->expire_year . '</span>
                         </div>';
-                    }
-                    echo '<div class="card">
+                }
+                echo '<div class="card">
                         <p class="option">
                             <input style="display:inline-block;" type="radio" name="paylands_card" class="paylands-card" value="custom">
                             <strong class="card-number">Agregar nueva tarjeta</strong>
@@ -324,7 +324,7 @@ function paylands_init_gateway_class() {
                             <div id="paylands-frame"></div>
                         </div>
                     </div>';
-                echo '<input type="hidden" name="paylands_uuid" id="paylands-uuid"></div>';  
+                echo '<input type="hidden" name="paylands_uuid" id="paylands-uuid"></div>';
             } else {
                 echo '<div class="custom-form">
                     <p class="paylands-messages"></p>
@@ -332,39 +332,39 @@ function paylands_init_gateway_class() {
                     <input type="hidden" name="paylands_uuid" id="paylands-uuid">
                 </div>';
             }
-			do_action( 'woocommerce_credit_card_form_end', $this->id );
-			echo '<div class="clear"></div></fieldset>';
-		}
+            do_action( 'woocommerce_credit_card_form_end', $this->id );
+            echo '<div class="clear"></div></fieldset>';
+        }
 
-		/*
-		 * Custom CSS and JS, in most cases required only when you decided to go with a custom credit card form
-		 */
-		public function payment_scripts() {
-            wp_enqueue_script( 'paylands', 'https://api.paylands.com/js/v1-iframe.js' ); 
-			wp_enqueue_script( 'woocommerce_paylands' );
-		}
+        /*
+         * Custom CSS and JS, in most cases required only when you decided to go with a custom credit card form
+         */
+        public function payment_scripts() {
+            wp_enqueue_script( 'paylands', 'https://api.paylands.com/js/v1-iframe.js' );
+            wp_enqueue_script( 'woocommerce_paylands' );
+        }
 
-		/*
- 		 * Fields validation, more in Step 5
-		 */
-		public function validate_fields(){
-			if( empty( $_POST[ 'billing_first_name' ]) ) {
-				wc_add_notice(  'Nombre es requerido', 'error' );
-				return false;
-			}
-			return true;
-		}
+        /*
+          * Fields validation, more in Step 5
+         */
+        public function validate_fields(){
+            if( empty( $_POST[ 'billing_first_name' ]) ) {
+                wc_add_notice(  'Nombre es requerido', 'error' );
+                return false;
+            }
+            return true;
+        }
 
-		/*
-		 * We're processing the payments here, everything about it is in Step 5
-		 */
-		public function process_payment( $order_id ) {
-			global $woocommerce;
+        /*
+         * We're processing the payments here, everything about it is in Step 5
+         */
+        public function process_payment( $order_id ) {
+            global $woocommerce;
             try {
                 $isSecure = $this->get_option( 'paylands_secure' ) == 'no' ? false : true;
                 if ($isSecure) {
-                    if(!$_POST["paylands_uuid"]) {
-                        wc_add_notice(__('A ocurrido un error al crear el pedido.'), 'error');
+                    if(!isset($_POST["paylands_uuid"])) {
+                        wc_add_notice(__('Ha ocurrido un error al crear el pedido.'), 'error');
                         return;
                     }
                     $order = wc_get_order( $order_id );
@@ -379,9 +379,9 @@ function paylands_init_gateway_class() {
                         'result' => 'success',
                         'redirect' => $tokenUrl
                     );
-                    
+
                 } else {
-                    if(!$_POST["paylands_uuid"]) {
+                    if(!isset($_POST["paylands_uuid"])) {
                         wc_add_notice(__('Se produjo un error al crear el pedido.'), 'error');
                         return;
                     }
@@ -400,27 +400,28 @@ function paylands_init_gateway_class() {
                         $order->payment_complete();
                         $order->reduce_order_stock();
 
+
                         switch ( $plOrder->order->status ) {
                             case 'PENDING_CONFIRMATION':
                                 $order->add_order_note( 'El cobro se realizará cuando el comercio envíe el/los producto/s. ¡Gracias!', true );
                                 $order->add_order_note( 'Paylands uuid: ' . $plOrder->order->uuid, false );
-                                // if payment is diferred, add paylands uuid as meta to use it in the future confirmation.
-                                if ( version_compare( WC_VERSION, '2.7', '<' ) ) { 
+                                // if payment is deferred, add paylands uuid as meta to use it in the future confirmation.
+                                if ( version_compare( WC_VERSION, '2.7', '<' ) ) {
                                     update_post_meta( $order_id, '_paylands_uuid', $plOrder->order->uuid );
-                                } else { 
-                                    $order = new WC_Order( $order_id ); 
+                                } else {
+                                    $order = new WC_Order( $order_id );
                                     $order->update_meta_data( '_paylands_uuid', $plOrder->order->uuid );
                                     $order->save_meta_data();
                                 }
-                                
+
                                 break;
-                    
+
                             case 'SUCCESS':
-                                $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                                $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                                 break;
-                                
+
                             default:
-                                $order->add_order_note( 'Tu ordén ha sido pagada. ¡Gracias!', true );
+                                $order->add_order_note( 'Tu orden ha sido pagada. ¡Gracias!', true );
                                 break;
                         }
                         $woocommerce->cart->empty_cart();
@@ -435,7 +436,7 @@ function paylands_init_gateway_class() {
             } catch (\Exception $e) {
                 wc_add_notice(__($e->getMessage()), 'error');
             }
-		}
+        }
 
         /**
          * Create redirect url
@@ -509,8 +510,8 @@ function paylands_init_gateway_class() {
             $data = array(
                 'secure' => $isSecure,
                 'save_card' => $saveCard,
-                'url_ok' => get_site_url(null,"wp-content/plugins/paylands-module-woocommerce/success.php"),
-                'url_ko' => get_site_url(null, "wp-content/plugins/paylands-module-woocommerce/error.php"),
+                'url_ok' => get_site_url(null, "wp-content/plugins/". basename(dirname(__FILE__)) ."/success.php"),
+                'url_ko' => get_site_url(null, "wp-content/plugins/". basename(dirname(__FILE__)) . "/error.php"),
                 //old
                 'signature' => $this->get_option('signature'),
                 'amount' => $order->get_total() * 100,
@@ -518,7 +519,7 @@ function paylands_init_gateway_class() {
                 'customer_ext_id' => $customerId,
                 'additional' => 'usuario',
                 'service' => $this->get_option('service'),
-                "url_post" => get_site_url(null,"wp-content/plugins/paylands-module-woocommerce/update.php"),
+                "url_post" => get_site_url(null,"wp-content/plugins/" . basename(dirname(__FILE__)) ."/update.php"),
                 "template_uuid" => $this->get_option('service'),
                 "dcc_template_uuid" => "ea0d5f53-5901-4c6b-9d4a-7e7c9b0eeb7e",
                 "description" => "Order No. " . $order->get_id(),
@@ -586,7 +587,7 @@ function paylands_init_gateway_class() {
             $user = wp_get_current_user();
             return $user->exists();
         }
-        
+
         public function usuario_id() {
             $usuario = wp_get_current_user();
             return $usuario->ID;
@@ -598,7 +599,7 @@ function paylands_init_gateway_class() {
          */
         public function getCustomerId(): string
         {
-           
+
             if (!$this->usuario_registrado()) {
                 return 'wc-customer-cart-' . WC()->cart->get_cart_hash();
             } else {
@@ -713,6 +714,6 @@ function paylands_init_gateway_class() {
                 throw new Exception(__($result->message ." : ".$result->details),$status );
             }
         }
- 	}
-     
+    }
+
 }
