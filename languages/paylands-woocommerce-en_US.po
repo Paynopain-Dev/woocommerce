@@ -1,0 +1,273 @@
+msgid ""
+msgstr ""
+"Language: en_US\n"
+"POT-Creation-Date: 2020-02-12 02:51+0000\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"PO-Revision-Date: 2020-02-12 02:52+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"Project-Id-Version: Paylands WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: paylands <support@paylands.com>\n"
+"Language-Team: English (United States)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Loco-Version: 2.3.1; wp-5.3.2"
+
+#. 1. URL link.
+#: paylands-woocommerce.php:47
+#, php-format
+msgid ""
+"Paylands requires WooCommerce to be installed and active. You can download "
+"%s here."
+msgstr "Paylands requires WooCommerce to be installed and active."
+
+#: includes/class-paylands-woocommerce-gateway.php:38
+msgid "Paylands WooCommerce Gateway"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:39
+msgid "Official Payment Gateway for Paylands."
+msgstr "Official Payment Gateway for Paylands"
+
+#: includes/class-paylands-woocommerce-gateway.php:73
+msgid "Enable/Disable"
+msgstr "Enable/Disable"
+
+#: includes/class-paylands-woocommerce-gateway.php:75
+msgid "Enable Payland Gateway"
+msgstr "Enable Paylands Gateway"
+
+#: includes/class-paylands-woocommerce-gateway.php:79
+msgid "Title"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:81
+msgid "This is the title the user will see"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:82
+msgid "Paylands Gateway"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:86
+msgid "Description"
+msgstr "Description"
+
+#: includes/class-paylands-woocommerce-gateway.php:88
+msgid ""
+"Payment method description that the customer will to see on your checkout."
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:89
+msgid "Pay with a credit/debit card"
+msgstr "Pay with a credit/debit card"
+
+#: includes/class-paylands-woocommerce-gateway.php:93
+msgid "Instructions"
+msgstr "Instructions"
+
+#: includes/class-paylands-woocommerce-gateway.php:95
+msgid "Instructions that will be added to the thank you page and emails."
+msgstr "Instructions that will be added to the thank you page and emails."
+
+#: includes/class-paylands-woocommerce-gateway.php:100
+msgid "Test mode"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:101
+msgid "Enable Test Mode"
+msgstr "Enable Test Mode?"
+
+#: includes/class-paylands-woocommerce-gateway.php:103
+msgid "Place the payment gateway in test mode using test API keys."
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:108
+msgid "Test API Key"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:110
+#: includes/class-paylands-woocommerce-gateway.php:131
+msgid "Enter your Paylands User Api Key."
+msgstr "Enter your Paylands User Api Key."
+
+#: includes/class-paylands-woocommerce-gateway.php:115
+msgid "Test Signature Key"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:117
+#: includes/class-paylands-woocommerce-gateway.php:138
+msgid "Enter your Paylands User Siganture."
+msgstr "Enter your Paylands User Signature"
+
+#: includes/class-paylands-woocommerce-gateway.php:122
+msgid "Test User Service"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:124
+#: includes/class-paylands-woocommerce-gateway.php:145
+msgid "Enter your Paylands User Service."
+msgstr "Enter your Paylands User Service"
+
+#: includes/class-paylands-woocommerce-gateway.php:129
+msgid "Live API Key"
+msgstr "Live API Key"
+
+#: includes/class-paylands-woocommerce-gateway.php:136
+msgid "Live Signature Key"
+msgstr "Live Signature Key"
+
+#: includes/class-paylands-woocommerce-gateway.php:143
+msgid "Live User Service"
+msgstr "Live User Service"
+
+#: includes/class-paylands-woocommerce-gateway.php:150
+msgid "Save Cards"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:151
+msgid "Enable save cards?"
+msgstr "Save Cards?"
+
+#: includes/class-paylands-woocommerce-gateway.php:153
+msgid "The customer will can save their cards?."
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:158
+msgid "Secure Payment"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-gateway.php:159
+msgid "Enable Secure Payment"
+msgstr "Enable Secure Payment?"
+
+#: includes/class-paylands-woocommerce-gateway.php:161
+msgid "Active/Desactive the secure payment option"
+msgstr "Active/Desactive the secure payment option"
+
+#: includes/class-paylands-woocommerce-controller.php:84
+msgid "Choose Card"
+msgstr "Choose Card"
+
+#: includes/class-paylands-woocommerce-controller.php:85
+msgid "Submit"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:86
+msgid "Add New Card"
+msgstr "Add New Card"
+
+#: includes/class-paylands-woocommerce-controller.php:87
+msgid "Delete Card"
+msgstr "Delete Card"
+
+#: includes/class-paylands-woocommerce-controller.php:88
+msgid "Ending in"
+msgstr "Ending in"
+
+#: includes/class-paylands-woocommerce-controller.php:89
+msgid "Expires"
+msgstr "Expires"
+
+#: includes/class-paylands-woocommerce-controller.php:144
+#: includes/class-paylands-woocommerce-controller.php:145
+msgid "Success Transaction!"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:146
+msgid ""
+"Thanks for using Paylands, to get order details please close this window and "
+"keep navigating through the store."
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:159
+#: includes/class-paylands-woocommerce-controller.php:160
+msgid "Failed Transaction!"
+msgstr "Failed Transaction!"
+
+#: includes/class-paylands-woocommerce-controller.php:161
+msgid ""
+"We apologize the transaction was not success, please contact to store's "
+"administrator to get more details"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:162
+msgid "Try Again"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:164
+msgid "Cargando..."
+msgstr "Loading..."
+
+#: includes/class-paylands-woocommerce-controller.php:297
+#: includes/class-paylands-woocommerce-controller.php:300
+msgid "Payland Charge Completed"
+msgstr "Payland Charge Completed"
+
+#: includes/class-paylands-woocommerce-controller.php:303
+msgid "Payment Refused by merchant"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:306
+#: includes/class-paylands-woocommerce-controller.php:339
+msgid "Payment Error"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:309
+msgid "Payment Blacklisted"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:312
+msgid "Payment Cancelled"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:315
+msgid "Payment Expired"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:318
+msgid "Payment Fraud"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:324
+msgid "Payment Pending of confirmation"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:327
+msgid "Payment Refunded"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:330
+msgid "Payment Pending Processor Response"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:333
+msgid "Payment Pending 3DS Response"
+msgstr ""
+
+#: includes/class-paylands-woocommerce-controller.php:336
+msgid "Payment Pending Card"
+msgstr ""
+
+#. Name of the plugin
+msgid "Paylands WooCommerce"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Start to sell in your store using the Paylands Gateway as your secure "
+"payment method."
+msgstr ""
+
+#. URI of the plugin
+msgid "http://paylands.com/"
+msgstr ""
+
+#. Author of the plugin
+msgid "Paylands"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://paylands.com/contacto/"
+msgstr ""

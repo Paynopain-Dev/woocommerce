@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://paylands.com/
+ * @link       http://paylands.com/contacto/
  * @since      1.0.0
  *
  * @package    Paylands_Woocommerce
@@ -99,66 +99,5 @@ class Paylands_Woocommerce_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/paylands-woocommerce-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
-	
-	
-	
-	
-	/**
-	 * Fired when WC order status has changed
-	 * 
-	 */
-	public function order_status_changed( $order_id ) {
-		$paylands_gateway 		= WC()->payment_gateways->payment_gateways()['paylands'];
-		$order 					= wc_get_order( $order_id );
-
-		$order_status			= $order->data['status'];
-		$order_uuid				= $order->get_meta('_paylands_uuid', true );
-		$pay_type 				= $paylands_gateway->get_option( 'pay_type' );
-		$payment_order_status 	= $paylands_gateway->get_option( 'payment_order_status' );
-		$signature 				= $paylands_gateway->get_option( 'signature' );
-
-		
-		/** Pay type "WITHHOLD PAYMENT" is active */
-		if( $pay_type == 'withhold_payment' && $order_uuid){
-			
-			$data = array(
-				'signature' => $signature,
-				'order_uuid' => $order_uuid,
-			);
-
-			// If the order change to the status as the configured in admin, the withhold amount will be paid.
-			if( $order_status == $payment_order_status ){
-				// Call to api
-				$plOrder = $paylands_gateway->paymentConfirmation($data);
-
-				// Add some notes to admin
-				if( in_array($plOrder->order->status,["SUCCESS"]) ){
-					$order->add_order_note( 'Paylands: CONFIRMED PAYMENT of order uuid ' . $plOrder->order->uuid, false );
-				}else {
-					$order->add_order_note( 'Paylands: Something went wrong during confirmation of order uuid ' . $plOrder->order->uuid, false );
-				}
-
-			}
-
-			// If the order change to cancelled, we should release the amount that have been withhold
-			if( $order_status == 'cancelled' ){
-				// Call to api
-				$plOrder = $paylands_gateway->paymentCancellation($data);
-
-				// Add some notes to admin
-				if( in_array($plOrder->order->status,["CANCELLED"]) ){
-					$order->add_order_note( 'Paylands: CANCELLED PAYMENT of order uuid ' . $plOrder->order->uuid, false );
-				}else {
-					$order->add_order_note( 'Paylands: Something went wrong during cancelation of order uuid ' . $plOrder->order->uuid, false );
-				}
-			}
-
-		}
-
-
-
-	}
-
-
 
 }

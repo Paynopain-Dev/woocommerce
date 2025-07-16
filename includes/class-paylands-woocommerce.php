@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://paylands.com/
+ * @link       http://paylands.com/contacto/
  * @since      1.0.0
  *
  * @package    Paylands_Woocommerce
@@ -57,6 +57,8 @@ class Paylands_Woocommerce {
 	 */
 	protected $version;
 
+	public $locales;
+
 	/**
 	 * Define the core functionality of the plugin.
 	 *
@@ -73,12 +75,37 @@ class Paylands_Woocommerce {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'paylands-woocommerce';
-
-		$this->load_dependencies();
+		$this->locales = PAYLANDS_ROOT_PATH . 'languages';
 		$this->set_locale();
-		$this->define_admin_hooks();
-		$this->define_public_hooks();
 
+		$this->define_constants();
+		$this->load_dependencies();
+		// $this->define_admin_hooks();
+		$this->define_public_hooks();
+		$this->define_woocommerce_hooks();
+
+		// add_action( 'plugin_loaded', array( $this, 'set_locale' ) );
+	}
+
+	/**
+	 * Define the Plugin constants
+	 *
+	 * - PLUGIN NAME
+	 * - Path of the plugin.
+	 * - Path of includes
+	 * - Path of admin files
+	 * - Path of the pubic files
+	 *
+	 * @since  	1.0.0
+	 * @access 	private
+	 */
+	private function define_constants() {
+		define( 'PAYLANDS_WOOCOMMERCE_PLUGIN_NAME', $this->plugin_name );
+        define( 'PAYLANDS_WOOCOMMERCE_PATH', plugin_dir_path( dirname( __FILE__ ) ) );
+        define( 'PAYLANDS_WOOCOMMERCE_INCLUDES', PAYLANDS_WOOCOMMERCE_PATH . 'includes' );
+        define( 'PAYLANDS_WOOCOMMERCE_ADMIN', PAYLANDS_WOOCOMMERCE_PATH . 'admin' );
+        define( 'PAYLANDS_WOOCOMMERCE_PUBLIC', PAYLANDS_WOOCOMMERCE_PATH . 'public' );
+        define( 'PAYLANDS_WOOCOMMERCE_ASSETS', plugin_dir_url( __FILE__ ) . 'assets' );
 	}
 
 	/**
@@ -103,24 +130,91 @@ class Paylands_Woocommerce {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-paylands-woocommerce-loader.php';
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-paylands-woocommerce-i18n.php';
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-paylands-woocommerce-admin.php';
+		require_once PAYLANDS_WOOCOMMERCE_ADMIN . '/class-paylands-woocommerce-admin.php';
+
+		/**
+		 * The class responsible to load the Paylands Logger
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-logger.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-paylands-woocommerce-public.php';
+		require_once PAYLANDS_WOOCOMMERCE_PUBLIC . '/class-paylands-woocommerce-public.php';
+
+		/**
+		 * The Trait responsible to define some helpers used on ajax and controller.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/traits/trait-paylands-helpers.php';
+
+		/**
+		 * The class responsible to load the Paylands Gateway for WooCommerce.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-gateway.php';
+
+		/**
+		 * The class responsible to load the Paylands Gateway Loader.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-gateway-loader.php';
+
+		/**
+		 * The class responsible to load the Paylands Orders Model.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-orders.php';
+
+		/**
+		 * The class responsible to load the Paylands Cards Model.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-cards.php';
+
+		/**
+		 * The class responsible to load the Paylands Controller.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-controller.php';
+
+		/**
+		 * The class responsible to load the Paylands Gateway Loader.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/api/class-paylands-api-client.php';
+
+		/**
+		 * The class responsible to load the Paylands Gateway Ajax hooks.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/class-paylands-woocommerce-ajax.php';
+
+		/**
+		 * The class responsible to load the Paylands Router Processor Class.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/http/class-processor.php';
+
+		/**
+		 * The class responsible to load the Paylands Route Class.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/http/class-route.php';
+
+		/**
+		 * The class responsible to load the Paylands Router Class.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/http/class-router.php';
+
+		/**
+		 * The class responsible to load the Paylands Gateway Ajax hooks.
+		 */
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/http/routes.php';
+
+		require_once PAYLANDS_WOOCOMMERCE_INCLUDES . '/actions.php';
 
 		$this->loader = new Paylands_Woocommerce_Loader();
 
@@ -135,11 +229,26 @@ class Paylands_Woocommerce {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	public function set_locale() {
+		
+		// load_plugin_textdomain(
+		// 	'paylands-woocommerce',
+		// 	false,
+		// 	$this->locales
+		// );
 
-		$plugin_i18n = new Paylands_Woocommerce_i18n();
+		if ( function_exists( 'determine_locale' ) ) {
+			$locale = determine_locale();
+		} else {
+			// @todo Remove when start supporting WP 5.0 or later.
+			$locale = is_admin() ? get_user_locale() : get_locale();
+		}
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$locale = apply_filters( 'plugin_locale', $locale, 'paylands-woocommerce' );
+
+		unload_textdomain( 'paylands-woocommerce' );
+		load_textdomain( 'paylands-woocommerce', $this->locales . '/paylands-woocommerce-' . $locale . '.mo' );
+		load_plugin_textdomain( 'paylands-woocommerce', false, $this->locales );
 
 	}
 
@@ -156,10 +265,7 @@ class Paylands_Woocommerce {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		
-		$this->loader->add_action( 'woocommerce_order_status_changed', $plugin_admin, 'order_status_changed' );
-		
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 	}
 
@@ -177,6 +283,21 @@ class Paylands_Woocommerce {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+	}
+
+	/**
+	 * Register the woocommerce hooks to can see the payment gateway
+	 * in the setting payment options.
+	 *
+	 * @since 	1.0.0
+	 * @access 	private
+	 */
+	private function define_woocommerce_hooks() {
+
+		$pnp_loader = new Paylands_Gateway_Loader();
+
+		$this->loader->add_action( 'plugins_loaded', $pnp_loader, 'paylands_payment_gateway_init' );
+		$this->loader->add_filter( 'woocommerce_payment_gateways', $pnp_loader, 'add_pnp_paylands_gateway');
 	}
 
 	/**

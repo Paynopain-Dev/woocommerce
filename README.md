@@ -1,32 +1,29 @@
-# Paylands plugin
-Paylands es una pasarela de pago la cual nos permite hacer diversas operaciones o pagos de una manera segura y eficaz.
-Dicho plugin es capaz de realizar una conexión con Paylands para poder realizar pagos online con woocommerce.
-Para poder saber más sobre Paylands podéis acceder a la siguiente url: [aquí](https://paylands.com).
+# Paylands WooCommerce
+Contributors: Paylands
+Donate link: http://paylands.com/contacto/
+Requires at least: 3.0.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-## Requisitos para poder usarlo
-Recomendamos tener instaladas unas versiones de Wordpress y WooCommerce iguales o superiores a las siguientes:
+Start to sell in your store using the Paylands Gateway as your secure payment method.
 
-- Wordpress: 5.2.1
-- Woocommerce: 3.5.3
+## Installation
 
-Recuerda que para poder usar paylands, necesitas tener instalado los requisitos previos y tener woocommerce instalado
-en la sección de plugins de tu wordpress. Para eso es tan fácil como descargar la versión especificada de woocommerce
-[aquí](https://wordpress.org/plugins/woocommerce/advanced/#plugin-download-history-stats) y colocar dicho zip en la sección
-de plugins para extraerlo.
+Upload this plugin to your WordPress installation and setup it with your rights
+credentials (Api Key, Signature and user service keys)
 
-![sección de Plugins 1](resources/fase1.png)
+## Changelog
 
-Una vez estamos aquí, pulsamos a Upload plugin, y esto nos llevará a la localización donde añadiremos el zip:
-
-![sección de Plugins 1](resources/fase2.png)
-
-## Instalación
-Esta sección describe cómo instalar el plugin y hacerlo funcionar. Siga estos pasos:
-
-1. Activa el plugin a través del menú 'Plugins' de WordPress con la casilla de verificación
-2. Activar el plugin de Paylands también en el mismo sitio
-3. Ir a la configuración de Paylands, y añadir en `Paylands-gateway` todas las credenciales necesarias
-
-
-
-
+- 3.0.0 Includes the new paylands flow, loading the paylands inside the e-commerce site.
+- 3.0.1 Fixs loading paylands modal with mod_rewrite disabled.
+- 3.2.0 Copy text fixed and disable save cards when a customer buy as a guest user.
+- 3.3.0 Include Logs.
+- 3.4.0 Introduce the payment form lang in the payment settings. This able to the admin can load the paylands payment with the different languages available in the paylands api.
+- 3.4.1 Delete fancy box jquery. Use the default jquery loaded with WordPress
+- 3.4.2 Fix bug related with detect the payment method selected in order confirmation
+- 3.4.3 Fix bug related with path sent to fancybox. Now, we are the entire domain, to prevent if a site is installed on a sub folder.
+- 3.4.4 Fix load locale.
+- 3.5.0 Add functionality to change the default order status when user pay with paylands
+- 3.5.1 Added Catalan language to payment form. Reduced Paylands' logo size when selecting payment method
+- 3.5.2 Payment modal is resized to fit payment card when retrying failed operation.
+- 3.5.4 General improvements and bug fixes.

@@ -3,7 +3,7 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://paylands.com/
+ * @link       http://paylands.com/contacto/
  * @since      1.0.0
  *
  * @package    Paylands_Woocommerce

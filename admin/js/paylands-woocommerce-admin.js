@@ -29,34 +29,4 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-	$( window ).load(function() {
-		
-		/**
-		 * Show/Hide field payment_order_status depend on pay_type selection
-		 * 
-		 */
-		if( $('#woocommerce_paylands_pay_type').length ){
-
-			// Show/hide payment_order_status val depending on stored value
-			var payTypeSelected = $('#woocommerce_paylands_pay_type').val();
-			if( payTypeSelected == 'withhold_payment' ){
-				$('#woocommerce_paylands_payment_order_status').parents('tr').show();
-			}else{
-				$('#woocommerce_paylands_payment_order_status').parents('tr').hide();
-			}
-
-			// Show/hide payment_order_status val depending on selector change
-			$('#woocommerce_paylands_pay_type').change(function(){
-				var selected =  this.value;
-				if( selected == 'withhold_payment' ){
-					$('#woocommerce_paylands_payment_order_status').parents('tr').show();
-				}else{
-					$('#woocommerce_paylands_payment_order_status').parents('tr').hide();
-				}
-		
-			})
-		}
-		
-	});
-
 })( jQuery );
