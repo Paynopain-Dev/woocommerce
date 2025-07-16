@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://paylands.com/
+ * @link       http://paylands.com/contacto/
  * @since      1.0.0
  *
  * @package    Paylands_Woocommerce
@@ -37,7 +37,7 @@ class Paylands_Woocommerce_i18n {
 		load_plugin_textdomain(
 			'paylands-woocommerce',
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			plugin_basename( dirname( __FILE__ ) ) . '/languages/'
 		);
 
 	}

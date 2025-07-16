@@ -5,7 +5,7 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       https://paylands.com/
+ * @link       http://paylands.com/contacto/
  * @since      1.0.0
  *
  * @package    Paylands_Woocommerce
